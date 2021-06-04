@@ -1,0 +1,29 @@
+卷 新加卷 的文件夹 PATH 列表
+卷序列号为 5807-EDB0
+E:.
+│  App.vue
+│  list.txt
+│  main.js
+│  
+├─assets
+│  ├─css
+│  │      base.css
+│  │      normalize.css
+│  │      
+│  └─img
+├─common
+├─components
+│  ├─common
+│  └─content
+├─network
+├─router
+│      index.js
+│      
+├─store
+│      index.js
+│      
+└─views
+    ├─about
+    ├─category
+    ├─home
+    └─profile
