@@ -1,9 +1,26 @@
 @import './normalize.css';
 
+:root{
+  --text-color: #333;
+  --background-color: #fff;
+  --color-tint: #f67783;
+  --font-size: 14px;
+  --line-height: 1.5;
+}
+
+.clearfix::after{
+  content: "";
+  display: table;
+  clear: both;
+  height: 0;
+  visibility: hidden;
+}
+
 *{
   padding: 0;
   margin: 0;
 }
+
 
 ul{
   list-style: none;

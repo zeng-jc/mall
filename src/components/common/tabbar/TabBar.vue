@@ -1,6 +1,6 @@
 <template>
   <section id="tab-bar">
-    <slot/>
+    <slot />
   </section>
 </template>
 
@@ -18,6 +18,6 @@ export default {
   left: 0;
   right: 0;
   background-color: #f6f6f6;
-  box-shadow: 0px 5px 10px 1px rgba(100, 100, 100, 0.5);
+  box-shadow: 0px 0px 4px rgba(195, 195, 195, 0.5);
 }
 </style>

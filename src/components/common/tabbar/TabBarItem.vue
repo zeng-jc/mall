@@ -37,7 +37,7 @@ export default {
 #tab-bar .tab-bar-item {
   flex: 1;
   text-align: center;
-  font-size: 14px;
+  font-size: 15px;
 }
 #tab-bar .tab-bar-item img {
   width: 24px;
