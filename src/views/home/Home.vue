@@ -1,5 +1,5 @@
 <template>
-  <div id="home" @scroll="loadMore">
+  <div id="home" @scroll="loadMore" ref="home">
     <!-- 顶部导航栏 -->
     <nav-bar class="home-nav">
       <div slot="center">购物街</div>
@@ -19,22 +19,20 @@
     <!-- 商品列表 -->
     <goods-list :goods="showCurGoods"></goods-list>
     <!-- 回到顶部 -->
-    <back-top
-      class="back-top"
-      :backTop="{ el: '#home', move: 700 }"
+    <main-back-top
       v-show="isShow"
-    >
-      <img src="~assets/img/home/arrow.svg" alt="" />
-    </back-top>
+      :main-back-top="{ el: '#home', move: 700 }"
+    />
   </div>
 </template>
 
 <script>
 // 公共组件
 import NavBar from "components/common/navbar/NavBar";
-import BackTop from "components/common/backTop/BackTop";
 import TabControl from "components/content/tabControl/TabControl";
 import GoodsList from "components/content/goods/GoodsList";
+import MainBackTop from "components/content/mainBackTop/MainBackTop";
+
 // 子组件
 import HomeSwiper from "./childComps/HomeSwiper";
 import RecommendView from "./childComps/RecommendView";
@@ -60,6 +58,7 @@ export default {
       },
       currentType: "pop",
       isShow: false,
+      homeY: 0,
     };
   },
   components: {
@@ -67,7 +66,7 @@ export default {
     NavBar,
     TabControl,
     GoodsList,
-    BackTop,
+    MainBackTop,
     //子组件
     HomeSwiper,
     RecommendView,
@@ -100,17 +99,19 @@ export default {
           break;
       }
     },
-    loadMore(e) {
-      this.scrollHome = e.currentTarget;
+    loadMore() {
+      const homeElem = this.$refs.home;
+      //记录滚动的位置，切换到当前组件时为这里获取的位置
+      this.homeY = homeElem.scrollTop;
       //上拉触底加载更多
       if (
-        Math.ceil(this.scrollHome.scrollTop + this.scrollHome.clientHeight) >=
-        this.scrollHome.scrollHeight
+        Math.ceil(homeElem.scrollTop + homeElem.clientHeight) >=
+        homeElem.scrollHeight
       ) {
         this.getHomeGoods(this.currentType);
       }
       //通过滚动监听组件的显示和隐藏
-      if (this.scrollHome.scrollTop > 1200) {
+      if (homeElem.scrollTop > 1200) {
         this.isShow = true;
       } else {
         this.isShow = false;
@@ -133,7 +134,13 @@ export default {
         this.goods[type].page += 1;
       });
     },
-  }
+  },
+  activated() {
+    this.$refs.home.scrollTop = this.homeY;
+  },
+  // deactivated() { 
+  //   console.log(this.$refs.home.scrollTop);//打印结果始终为 0
+  // },
 };
 </script>
 
@@ -158,22 +165,5 @@ export default {
   position: sticky;
   top: 0;
   background-color: #fff;
-}
-
-.back-top {
-  width: 40px;
-  height: 40px;
-  position: fixed;
-  bottom: 60px;
-  right: 8px;
-  z-index: 100;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.8);
-}
-.back-top img {
-  height: 40px;
-  width: 28px;
-  margin: 0 auto;
-  display: block;
 }
 </style>
