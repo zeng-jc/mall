@@ -19,6 +19,7 @@ export default {
   line-height: 44px;
   text-align: center;
   box-shadow: 0px 0px 4px rgba(195, 195, 195, 0.5);
+  font-size: 14px;
 }
 .nav-bar .center{
   flex: 1;

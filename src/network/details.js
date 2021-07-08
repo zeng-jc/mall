@@ -21,6 +21,7 @@ export class DetailsBasic {
     this.oldPrice = itemInfo.oldPrice;
     this.nowPrice = itemInfo.lowNowPrice;
     this.discountDesc = itemInfo.discountDesc;
+    this.desc = itemInfo.desc;
     this.columns = columns;
     this.services = services;
   }

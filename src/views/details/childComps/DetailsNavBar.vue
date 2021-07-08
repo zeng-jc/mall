@@ -1,5 +1,5 @@
 <template>
-  <nav-bar>
+  <nav-bar class="details-nav-bar">
     <div slot="left" class="details-return">
       <img src="~assets/img/navbar/arrow-left.svg" alt="" @click="returnBtn" />
     </div>
@@ -48,11 +48,19 @@ export default {
 </script>
 
 <style>
-.details-title {
+.details-nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  background-color: white;
+}
+.details-nav-bar .details-title {
   display: flex;
   justify-content: space-evenly;
 }
-.details-return img {
+.details-nav-bar .details-return img {
   width: 25px;
   height: 25px;
   vertical-align: middle;

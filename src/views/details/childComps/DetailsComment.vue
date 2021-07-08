@@ -17,7 +17,7 @@
     <!-- 商品样式与日期 -->
     <div class="goods-style">
       <!-- 过滤传入的时间戳 -->
-      <span>{{ commentInfo.created | createDate }}</span>
+      <span>{{createDate}}</span>
       {{ commentInfo.style }}
     </div>
     <!-- 评论缩略图 -->
@@ -41,11 +41,11 @@ export default {
       },
     },
   },
-  filters: {
-    createDate(value) {
-      if (!value) return "";
+  computed: {
+    createDate() {
+      if (!this.commentInfo.created) return "";
       //由于JavaScript在内部使用毫秒，而普通的时间戳通常以秒为单位，所以需要乘以1000
-      const date = new Date(value * 1000);
+      const date = new Date(this.commentInfo.created * 1000);
       return dateFormat(date, "YYYY-MM-DD");
     },
   },
@@ -62,9 +62,11 @@ export default {
   justify-content: space-between;
   align-items: center;
   border-bottom: 2px solid #f2f5f8;
+  font-size: 14px;
 }
 .comment-userinfo {
   margin: 10px 0;
+  font-size: 14px;
 }
 .comment-userinfo img {
   width: 45px;

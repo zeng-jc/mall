@@ -1,7 +1,7 @@
 <template>
   <div id="home" @scroll="loadMore" ref="home">
     <!-- 顶部导航栏 -->
-    <nav-bar class="home-nav">
+    <nav-bar class="home-nav-bar">
       <div slot="center">购物街</div>
     </nav-bar>
     <!-- 轮播图 -->
@@ -152,7 +152,7 @@ export default {
   border-top: 44px solid transparent;
   border-bottom: 49px solid transparent;
 }
-.home-nav {
+.home-nav-bar {
   background-color: var(--color-tint);
   color: #fff;
   position: fixed;
@@ -165,5 +165,6 @@ export default {
   position: sticky;
   top: 0;
   background-color: #fff;
+  font-size: 13px;
 }
 </style>

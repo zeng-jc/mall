@@ -1,34 +1,36 @@
 <template>
-  <div class="bottom-bar">
+  <div class="detail-bottom-bar">
     <div class="bar-service">
-      <span></span>
+      <span class="detail-bar-icon"></span>
       <span>客服</span>
     </div>
     <div class="bar-shop">
-      <span></span>
+      <span class="detail-bar-icon"></span>
       <span>店铺</span>
     </div>
     <div class="bar-collection">
-      <span></span>
+      <span class="detail-bar-icon"></span>
       <span>收藏</span>
     </div>
-    <div class="bar-shop-cart">
-      <span>加入购物车</span>
-    </div>
-    <div class="bar-buy">
-      <span>购买</span>
-    </div>
+    <div class="bar-shop-cart" @click="addCart">加入购物车</div>
+    <div class="bar-buy">购买</div>
   </div>
 </template>
 
 <script>
 export default {
   name: "DetailsBottomBar",
+  methods: {
+    addCart() {
+      this.$emit("addCart");
+    },
+  },
 };
 </script>
 
 <style>
-.bottom-bar {
+
+.detail-bottom-bar {
   position: fixed;
   bottom: 0px;
   height: 59px;
@@ -38,44 +40,53 @@ export default {
   z-index: 9999;
   display: flex;
   text-align: center;
+  align-items: center;
+  font-size: 12px;
 }
 
-.bar-service,
-.bar-shop,
-.bar-collection {
+.detail-bottom-bar .bar-service,
+.detail-bottom-bar .bar-shop,
+.detail-bottom-bar .bar-collection {
   width: 17%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.bar-service span:nth-child(1),
-.bar-shop span:nth-child(1),
-.bar-collection span:nth-child(1) {
-  margin-top: 5px;
-  width: 30px;
-  height: 30px;
+.detail-bottom-bar .bar-service .detail-bar-icon, 
+.detail-bottom-bar .bar-shop .detail-bar-icon,
+.detail-bottom-bar .bar-collection .detail-bar-icon {
+  margin-bottom: 2px;
+  width: 26px;
+  height: 26px;
   background: url(~assets/img/detail/detail_bottom.png) no-repeat;
-  background-size: 30px;
+  background-size: 26px;
 }
 
-.bar-service span:nth-child(1){
-  background-position: 0px -73px;
+.detail-bottom-bar .bar-service .detail-bar-icon {
+  background-position: 0px -62px;
 }
-.bar-shop span:nth-child(1) {
-  background-position: 1px -135px;
+.detail-bottom-bar .bar-shop .detail-bar-icon {
+  background-position: 1px -116px;
 }
 
-.bar-shop-cart {
+.detail-bottom-bar .bar-shop-cart {
   width: 26%;
   background-color: #ffdd10;
   line-height: 59px;
+  height: 100%;
+  font-size: 16px;
 }
-.bar-buy {
+
+
+.detail-bottom-bar .bar-buy {
   width: 23%;
   background-color: var(--color-tint);
   color: #fff;
   font-size: 18px;
   line-height: 59px;
+  height: 100%;
+  font-size: 16px;
 }
+
 </style>

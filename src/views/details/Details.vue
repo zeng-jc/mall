@@ -1,11 +1,7 @@
 <template>
   <div id="details" @scroll="detailsScroll" ref="details">
     <!-- 顶部导航栏组件 -->
-    <details-nav-bar
-      class="details-nav-bar"
-      @titleClick="titleClick"
-      ref="detailsTitle"
-    />
+    <details-nav-bar @titleClick="titleClick" ref="detailsTitle" />
     <!-- 顶部轮播图组件 -->
     <details-swiper :top-images="topImages" />
     <!-- 商品基本信息组件 -->
@@ -25,7 +21,7 @@
       :main-back-top="{ el: '#details', move: 700 }"
       v-show="isShow"
     />
-    <details-bottom-bar/>
+    <details-bottom-bar @addCart="addCart" />
   </div>
 </template>
 
@@ -50,7 +46,9 @@ import DetailsGoodsParams from "./childComps/DetailsGoodsParams.vue";
 // 评论组件
 import DetailsComment from "./childComps/DetailsComment.vue";
 //底部导航栏
-import DetailsBottomBar from './childComps/DetailsBottomBar.vue'
+import DetailsBottomBar from "./childComps/DetailsBottomBar.vue";
+
+import { mapActions } from "vuex";
 /**
  * 网络请求
  */
@@ -84,7 +82,7 @@ export default {
     DetailsGoodsInfo,
     DetailsGoodsParams,
     DetailsComment,
-    DetailsBottomBar
+    DetailsBottomBar,
   },
   data() {
     return {
@@ -166,6 +164,10 @@ export default {
     // console.log(this.$refs.params.$el);
   },
   methods: {
+    //将actions中的方法映射到 当前的methods中
+    ...mapActions({
+      add: "addGoodsToCart",
+    }),
     detailsScroll() {
       //获取dom元素
       const detailsTopY = this.$refs.details.scrollTop;
@@ -196,6 +198,27 @@ export default {
     imgLoad() {
       this.setDebounce();
     },
+    addCart() {
+      //1.获取购物车需要的信息
+      const product = {};
+      product.img = this.topImages[0];
+      product.title = this.basicInfo.title;
+      product.nowPrice = this.basicInfo.nowPrice;
+      product.desc = this.basicInfo.desc;
+      product.iid = this.iid;
+
+      //2. 将商品添加到购物车 （promise，mapActions）
+      // this.$store.dispatch("addGoodsToCart", product).then((data) => {
+      //   console.log(data);
+      // });
+      this.add(product).then((data) => {
+        //映射actions中的方法
+        console.log(this.$toast);
+        this.$toast.show(data);
+      });
+
+      //3. 这里显示弹窗不对的，因为这里你不能判断添加是否成功
+    },
   },
 };
 </script>
@@ -209,14 +232,6 @@ export default {
   border-bottom: 59px solid transparent;
   position: relative;
   z-index: 15;
-  background-color: white;
-}
-.details-nav-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 20;
   background-color: white;
 }
 </style>

@@ -44,6 +44,13 @@ export default {
 </script>
 
 <style>
+
+.item-params thead{
+  font-size: 15px;
+}
+.item-params tbody{
+ font-size: 13px;
+}
 .goods-size,
 .params-info {
   width: 100vw;
